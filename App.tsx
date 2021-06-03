@@ -1,7 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from 'react';
+import Constants from 'expo-constants';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { BeamCanvas, CanvasInitArgs } from './components/BeamCanvas';
+
+const PADDING = 10;
+const RATIO = 9 / 16;
+const WIDTH = Dimensions.get('window').width - PADDING * 2;
+const HEIGHT = WIDTH * RATIO;
 
 export default function App() {
   function draw({ context }: CanvasInitArgs) {
@@ -17,17 +22,20 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <BeamCanvas width={300} height={300} onInit={draw} />
-      <StatusBar style="auto" />
+      <View style={styles.canvasWrapper}>
+        <BeamCanvas width={WIDTH} height={HEIGHT} onInit={draw} />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: Constants.statusBarHeight,
+    padding: PADDING,
+  },
+  canvasWrapper: {
+    borderColor: 'red',
+    borderWidth: 1,
   },
 });
