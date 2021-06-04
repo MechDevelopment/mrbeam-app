@@ -1,5 +1,11 @@
 import Canvas, { Path2D } from 'react-native-canvas';
 import { CanvasRenderingContext2D } from 'react-native-canvas';
+import { Point } from '../types/canvas';
+
+interface Element {
+  renderMethod: string;
+  [key: string]: any;
+}
 
 export class DrawCanvas {
   private elements: any[] = [];
@@ -17,36 +23,29 @@ export class DrawCanvas {
     const { pos, path, scale } = options;
     const path2D = new Path2D(this.canvas);
 
-    path2D.moveTo(pos[0], pos[1]);
+    // path2D.moveTo(pos[0], pos[1]);
     for (const [x, y] of path) {
       const xCoord = pos[0] + x * scale[0];
       const yCoord = pos[1] + y * scale[1];
       path2D.lineTo(xCoord, yCoord);
     }
+    path2D.closePath();
 
     this.elements.push({ renderMethod: renderPath, options, path2D });
   }
 
-  public async pressTrigger(e: any) {
-    for (const element of this.elements) {
-      if (element.options.onClick) {
-        const p = await (this.ctx as any).isPointInPath(
-          element.path2D,
-          e[0],
-          e[1]
-        );
-        const s = await (this.ctx as any).isPointInStroke(
-          element.path2D,
-          e[0],
-          e[1]
-        );
-
-        if (p || s) {
-          console.log(p, s, p || s);
-          element.options.onClick(element.path2D);
-        }
+  public pressTrigger(point: Point) {
+    this.elements.forEach((el: Element) => {
+      if (el.options.onClick) {
+        (this.ctx as any)
+          .isPointInPath(el.path2D, point[0], point[1])
+          .then((status: 'false' | 'true') => {
+            if (status === 'true') {
+              el.options.onClick();
+            }
+          });
       }
-    }
+    });
   }
 
   public render() {

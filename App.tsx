@@ -11,8 +11,24 @@ const HEIGHT = WIDTH * RATIO;
 export default function App() {
   const drawHandler = ({ draw, size }: CanvasDrawArgs) => {
     const [width, height] = size;
+
     draw.path({
-      pos: [width / 2, height / 2],
+      pos: [110, 110],
+      path: [
+        [width / 3, height / 3],
+        [100, 100],
+        [0, 100],
+        [0, 0],
+      ],
+      lineWidth: 5,
+      scale: [1, 1],
+      onClick: () => {
+        console.log('line ');
+      },
+    });
+
+    draw.path({
+      pos: [100, height / 2],
       path: [
         [50, 0],
         [50, 50],
@@ -20,19 +36,9 @@ export default function App() {
         [0, 0],
       ],
       color: '#ff0000',
-      scale: [2, 2],
-      onClick: (x: any) => {
-        console.log(1);
-      },
-    });
-
-    draw.path({
-      pos: [0, 0],
-      path: [[width / 2, height / 2]],
-      lineWidth: 5,
       scale: [1, 1],
-      onClick: (x: any) => {
-        console.log(2);
+      onClick: () => {
+        console.log('square ');
       },
     });
   };

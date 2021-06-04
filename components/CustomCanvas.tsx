@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { GestureResponderEvent, TouchableOpacity } from 'react-native';
 import Canvas from 'react-native-canvas';
 import { DrawCanvas } from '../assets/ts/DrawCanvas';
+import { Point } from '../assets/types/canvas';
 
 const DPI = 2;
 
@@ -35,8 +36,8 @@ export const CustomCanvas = (props: BeamCanvasProps) => {
     }
   }, [canvasRef, onDraw]);
 
-  const pressHandler = (e: any) => {
-    const point = [e.nativeEvent.locationX, e.nativeEvent.locationY];
+  const pressHandler = (e: GestureResponderEvent) => {
+    const point: Point = [e.nativeEvent.locationX, e.nativeEvent.locationY];
     drawCanvas.pressTrigger(point);
   };
 
