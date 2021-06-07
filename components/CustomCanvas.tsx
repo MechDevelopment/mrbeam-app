@@ -47,3 +47,55 @@ export const CustomCanvas = (props: BeamCanvasProps) => {
     </TouchableOpacity>
   );
 };
+
+// draw.path({
+//   pos: [110, 110],
+//   path: [
+//     [width / 3, height / 3],
+//     [100, 100],
+//     [0, 100],
+//     [0, 0],
+//   ],
+//   lineWidth: 5,
+//   scale: [1, 1],
+//   onClick: () => {
+//     console.log('line ');
+//   },
+// });
+
+// draw.path({
+//   pos: [100, height / 2],
+//   path: [
+//     [50, 0],
+//     [50, 50],
+//     [0, 50],
+//     [0, 0],
+//   ],
+//   color: '#ff0000',
+//   scale: [1, 1],
+//   onClick: () => {
+//     console.log('square ');
+//   },
+// });
+//
+
+// <View style={styles.container}>
+//   <View style={styles.canvasWrapper}>
+//     <CustomCanvas width={WIDTH} height={HEIGHT} onDraw={drawHandler} />
+//   </View>
+// </View>
+
+// const styles = StyleSheet.create({
+//   content: {
+//     marginTop: Constants.statusBarHeight,
+//     flex: 1,
+//   },
+//   container: {
+//     marginTop: Constants.statusBarHeight,
+//     padding: PADDING,
+//   },
+//   canvasWrapper: {
+//     borderColor: 'red',
+//     borderWidth: 1,
+//   },
+// });
